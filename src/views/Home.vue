@@ -34,16 +34,10 @@
             <div text-align:center>欢迎: {{ loginName }}</div>
             <div>{{ date }}</div>
           </div>
-        
-        <el-dropdown  placement="bottom-start">
-          <el-button type="primary" size="mini">
-            个人中心<i class="el-icon-arrow-down el-icon--right"></i>
-          </el-button>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>密码修改</el-dropdown-item>
-            <el-dropdown-item>退出平台</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
+        <el-popconfirm title="确定要退出登录吗？" @confirm="loginOut">
+          <el-button type="danger" slot="reference">退出登录</el-button>
+        </el-popconfirm>
+      
         </div>
       </el-header>
 

@@ -469,7 +469,7 @@ export default {
         userId: row.id,
       };
       let { data: res } = await getRoleIdByUserIdApi(parm);
-      // console.log(res)
+       console.log(res)
       if (res.code == 200 && res.data) {
         this.radio = res.data.roleId;
         this.selectAssingParm.roleId = res.data.roleId;

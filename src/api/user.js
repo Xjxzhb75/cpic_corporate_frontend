@@ -11,6 +11,10 @@ export async function addUserApi(params) {
 export async function editUserApi(params) {
     return await http.put("/api/user",params)
 }
+//编辑用户
+export async function settingUserApi(params) {
+    return await http.put("/api/user/settingUser",params)
+}
 //删除用户
 export async function deleteUserApi(params) {
     return await http.delete("/api/user",params)
@@ -23,6 +27,9 @@ export async function getRolistForAssignApi(params) {
 export async function getRoleIdByUserIdApi(params) {
     return await http.getRestApi("/api/user/getRoleIdByUserId",params)
 }
+export async function getUserByUserIdApi(params) {
+    return await http.getRestApi("/api/user/getUserByUserId",params)
+}
 //分配角色保存
 export async function assignSaveApi(params) {
     return await http.post('/api/user/assingRole',params)
@@ -34,8 +41,4 @@ export async function getImageApi() {
 //退出登录
 export async function loginOutApi(params) {
     return await http.post("/api/sysUser/loginOut",params)
-}
-//还原数据库
-export async function restoreApi() {
-    return await http.post("/api/backup/restore")
 }
