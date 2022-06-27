@@ -69,27 +69,26 @@
     removeUserId,
     clearStorage,
     removeTokenTime,
-    removeloginName,
-    getloginName,
   } from "../utils/auth";
   var $vueIndex;
   export default {
     components: { MenuBar, tabs },
     computed: {
-      ...mapState({
-        isCollapse: (state) => state.MenuStore.isCollapse,
-      }),
+      // isCollapse(){
+      //   return this.$store.state.MenuStore.isCollapse
+      // },
+      
+      ...mapState('MenuStore',['isCollapse']),
+      ...mapState('UserStore',['loginName'])
+      //   isCollapse: (state) => state.MenuStore.isCollapse,
+      // }),
     },
     data() {
       return {
         date: "",
-        loginName: "",
         logolong,
         logopng,
       };
-    },
-    created() {
-      this.loginName = getloginName();
     },
     mounted() {
       $vueIndex = this;
@@ -100,7 +99,7 @@
     },
     methods: {
       iconClick() {
-        this.$store.commit("setOpenOrClose");
+        this.$store.commit("MenuStore/setOpenOrClose");
       },
       async loginOut() {
         let parm = {
@@ -111,7 +110,6 @@
           //清除相关信息
           removeToken();
           removeUserId();
-          removeloginName();
           clearStorage();
           removeTokenTime();
           //跳到登录

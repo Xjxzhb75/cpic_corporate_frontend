@@ -1,6 +1,7 @@
 //引入axios请求方法
-import { getMenuList } from '../api/login'
+import { getMenuList } from '../../api/login'
 export default {
+  namespaced: true,
   state: {
     //当前选中的选项卡
     editableTabsValue: "desktop",

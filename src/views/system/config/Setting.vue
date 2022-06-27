@@ -59,7 +59,7 @@
 </template>
 
 <script>
-import { getUserId,setloginName} from "../../../utils/auth";
+import { getUserId} from "../../../utils/auth";
 import { getUserByUserIdApi,settingUserApi} from "../../../api/user";
 export default {
   name:"Setting",
@@ -79,7 +79,6 @@ export default {
   },
   created(){
     this.userInfo();
-    console.log(this.userInfo());
   },
   methods:{
      async userInfo(){
@@ -88,7 +87,6 @@ export default {
       }
        let{data:res} = await getUserByUserIdApi(parm);
        if (res.code == 200 && res.data){
-        console.log(res.data)
         this.addModel=res.data
        }
      },
@@ -98,12 +96,11 @@ export default {
             console.log(this.addModel);
              let res=null;
              res =await settingUserApi(this.addModel);
+            console.log(res)
             if (res.data.code == 200) {
             this.userInfo();
-            setloginName(this.addModel.loginName);
+            this.$store.commit("UserStore/setloginInfo",res.data.data.loginName);
             this.$message.success(res.data.msg);
-            location.reload();
-            
           }}
         })
   

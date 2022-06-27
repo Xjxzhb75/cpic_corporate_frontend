@@ -20,10 +20,16 @@ export default {
   components: { MenuItem },
   computed:{
     ...mapState({
+      isCollapse(){
+        return this.$store.state.MenuStore.isCollapse
+      },
+      menuList(){
+        return this.$store.state.MenuStore.menuList
+      }
       //菜单伸缩
-      isCollapse:(state)=> state.MenuStore.isCollapse,
+      //isCollapse:(state)=> state.MenuStore.isCollapse,
       //菜单数据
-      menuList:state =>state.MenuStore.menuList
+      //menuList:state =>state.MenuStore.menuList
       })
   },
   data() {

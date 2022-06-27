@@ -7,7 +7,7 @@ import "element-ui/lib/theme-chalk/index.css";
 Vue.use(ElementUI);
 Vue.config.productionTip = false;
 // import Cookies from "js-cookie";
-import { getToken, removeloginName, removeToken, removeUserId } from "../src/utils/auth";
+import { getToken, removeToken, removeUserId } from "../src/utils/auth";
 //菜单收缩文字文字变图标
 import Fragment from "vue-fragment";
 Vue.use(Fragment.Plugin);
@@ -39,23 +39,23 @@ router.beforeEach(async (to, from, next) => {
       } else {
         try {
           setTimeout(async function () {
-            await store.dispatch("getMenuList", router);
+            await store.dispatch("MenuStore/getMenuList", router);
           }, 400);
           next();
         } catch (error) {
           removeToken();
           //重置用户id
           removeUserId();
-          removeloginName();
+          
           //跳到登录
           next({ path: "/login" });
         }
       }
     }
     //获取tabs
-    store.commit("getTabs");
+    store.commit("MenuStore/getTabs");
     //设置当前选中的tabs
-    store.commit("setActiveTabs", to.name);
+    store.commit("MenuStore/setActiveTabs", to.name);
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
       //存在白名单中

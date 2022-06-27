@@ -31,7 +31,7 @@ export default {
   methods:{
     //把当前点中的菜单放在选项卡中
     clickMenu(item){
-      this.$store.commit('clickMenu',item)
+      this.$store.commit('MenuStore/clickMenu',item)
       this.$router.push({name:item.name})
     }
       

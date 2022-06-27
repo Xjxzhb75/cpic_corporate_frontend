@@ -68,7 +68,7 @@
   import SignLeft from "./SignLeft.vue";
   import logo from "../assets/img/logo30.jpg";
   import { login } from "../api/login";
-  import { setToken, setUserId, setTokenTime,setloginName } from "../utils/auth";
+  import { setToken, setUserId, setTokenTime} from "../utils/auth";
   export default {
     components: { SignLeft },
     data() {
@@ -109,7 +109,7 @@
               let datas = res.data;
               setToken(datas.token);
               setUserId(datas.id);
-              setloginName(datas.loginName);
+              this.$store.commit('UserStore/setloginInfo',datas.loginName)
               setTokenTime(datas.expireTime);
               this.$router.push("home");
             } else {

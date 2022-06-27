@@ -42,7 +42,7 @@ export default {
       let obj = {};
       obj.title = tab.label;
       obj.name = tab.name;
-      this.$store.commit('clickMenu',obj);
+      this.$store.commit('MenuStore/clickMenu',obj);
       this.$router.push({name:tab.name})
     },
     
@@ -67,7 +67,7 @@ export default {
       this.editableTabsValue = activeName;
       this.editableTabs = tabs.filter((tab) => tab.name !== targetName);
       //设置当前激活的选项卡
-      this.$store.commit('setActiveTabs',this.editableTabsValue)
+      this.$store.commit('MenuStore/setActiveTabs',this.editableTabsValue)
       //激活的选项卡存储到sessionStorage里面
       sessionStorage.setItem('tabsList',JSON.stringify(this.editableTabs))
       //跳转到路由

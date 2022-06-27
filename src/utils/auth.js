@@ -3,7 +3,6 @@ import Cookies from 'js-cookie'
 const tokenKey = 'token';
 //定义用户id的key
 const userIdKey = 'userId';
-const loginNamekey ='loginName'
 
 //定义过期时间key
 const expireTimeKey = 'expireTime'
@@ -24,23 +23,13 @@ export function setUserId(params) {
     return Cookies.set(userIdKey,params)
 }
 //设置用户id到cookies里面
-export function setloginName(params) {
-    return Cookies.set(loginNamekey,params)
-}
 //获取用户id
 export function getUserId() {
     return Cookies.get(userIdKey)
 }
-export function getloginName() {
-    return Cookies.get(loginNamekey)
-}
-
 //移除用户id
 export function removeUserId() {
     return Cookies.remove(userIdKey)
-}
-export function removeloginName() {
-    return Cookies.remove(loginNamekey)
 }
 //清除sessionStorage
 export function clearStorage() {

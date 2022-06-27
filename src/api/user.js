@@ -15,6 +15,10 @@ export async function editUserApi(params) {
 export async function settingUserApi(params) {
     return await http.put("/api/user/settingUser",params)
 }
+//修改密码
+export async function editPasswordApi(params) {
+    return await http.put("/api/user/editpassword",params)
+}
 //删除用户
 export async function deleteUserApi(params) {
     return await http.delete("/api/user",params)
@@ -27,6 +31,7 @@ export async function getRolistForAssignApi(params) {
 export async function getRoleIdByUserIdApi(params) {
     return await http.getRestApi("/api/user/getRoleIdByUserId",params)
 }
+
 export async function getUserByUserIdApi(params) {
     return await http.getRestApi("/api/user/getUserByUserId",params)
 }
