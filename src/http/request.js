@@ -89,8 +89,9 @@ service.interceptors.response.use(
     } else {
       return Promise.reject(response);
     }
-  } ,error => {
-    console.log(error)
+  } ,
+  error => {
+    console.log(error);
     let obj = {};
     obj.code = 500;
     obj.data = null;
@@ -100,6 +101,7 @@ service.interceptors.response.use(
       duration: 3 * 1000
     })
     return Promise.reject(obj)
+    //return Promise.reject(obj)
   })
 
 //请求方法

@@ -8,7 +8,7 @@ export async function getParentTreeApi(){
     return await http.get("/api/department/parent")
 }
 //获取用户所在的机构
-export async function getDeptByUserId(params) {
+export async function getDeptByUserIdApi(params) {
     return await http.getRestApi("/api/department/getDeptByUserId",params)
 }
 //保存机构数据
