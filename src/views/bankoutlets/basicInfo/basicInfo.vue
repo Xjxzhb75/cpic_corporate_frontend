@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="box">
      <el-card class="box-card">
        <el-row :gutter="20">
         <el-col :span="5">
@@ -48,6 +48,11 @@
       :value="it.id">
     </el-option>
     </el-select>
+   </el-col>
+   <el-col :span="5">
+     <el-button type="success" size="mini" @click="addbasicinfo">添加</el-button>
+     <el-button  @click="onReson" size="mini" type="primary" > 重置</el-button>
+     
    </el-col>
        </el-row>
      </el-card>  
@@ -546,17 +551,29 @@
 </template>
 
 <script>
+
 import {   getUserId} from "../../../utils/auth"
-import { getDeptByUserIdApi } from "../../../api/department"
-import{getBankNameListApi,getBranchNameListApi} from "../../../api/outlets"
+import{getBankNameListApi,
+       getBranchNameListApi,
+      
+       addBasicinfoApi} from "../../../api/outlets"
     export default {
+      name:"basicInfo",
     data(){
         return{
+          bankvisitdata:{
+         userId:getUserId(),
+         deptId:'',
+         bankId:"",
+         branchId:"",
+         isExamine:"",
+         calendarsign:0,
+        },
             selectdeptDisabled:false,
             selectbankDisabled:true,
             selectbranchDisabled:true,
             mycontent:{'min-width': '450px'},
-            bankvisitdata:[],
+            
             bankNameProps:[],
             branchNameProps:[],
             optinProps:[],
@@ -629,19 +646,9 @@ import{getBankNameListApi,getBranchNameListApi} from "../../../api/outlets"
        },
      
     created(){
-    this.userDeptinfo();
+    this.optinProps=this.$store.state.UserStore.deptList
     },
     methods:{
-        async userDeptinfo(){
-        let parm={
-            userId:getUserId()
-            
-        }
-        let {data:res}= await getDeptByUserIdApi(parm);
-        if (res.code == 200){
-          this.optinProps=res.data
-          }
-        },
        async newOpenOption(deptId){
          this.selectdeptDisabled=!this.selectdeptDisabled;
          this.selectbankDisabled=!this.selectbankDisabled;
@@ -655,7 +662,7 @@ import{getBankNameListApi,getBranchNameListApi} from "../../../api/outlets"
         },
         async newbankOption(bankId){
             this.selectbankDisabled=!this.selectbankDisabled;
-            this.selectbranchDisabled=!this.selectbranchDisabled;
+            
            let parm={
             bankId
            }
@@ -663,20 +670,55 @@ import{getBankNameListApi,getBranchNameListApi} from "../../../api/outlets"
           if(res.code ==200){
             console.log(res.data);
             this.branchNameProps=res.data
+            this.selectbranchDisabled=!this.selectbranchDisabled;
           }
         },
-         newbranchOption(){
+         async newbranchOption(id){
            this.selectbranchDisabled=!this.selectbranchDisabled;
-           },
+           console.log(id);
+        this.bankvisitdata.branchId=id
+        
+        },
+        async addbasicinfo(){
+          
+        if(this.bankvisitdata.branchId == ""){
+          this.$message.error("支行没有选择，请先选择支行")
+        }else{
+          
+          this.basicinfo.branchId=this.bankvisitdata.branchId
+           try{
+           let {data:res} = await addBasicinfoApi(this.basicinfo)
+             console.log(res);
+             if(res.code==200){
+                this.$message.success(res.msg)
+               }
+           }catch(error){this.onReson()}
+       
+        }}, 
+
+
+
          handleChange(val) {
         console.log(val);
-      }
+          },
+          onReson(){
+            this.selectdeptDisabled=false;
+            this.selectbankDisabled=true;
+            this.selectbranchDisabled=true;
+            this.bankvisitdata.deptId="请选择支公司";
+            this.bankvisitdata.bankId="请选择银行";
+            this.bankvisitdata.branchId="请选择支行";
+          }
         }
     }   
     
 </script>
 
 <style lang="scss" scoped>
+.box{
+   height:88vh;
+    overflow:auto;
+}
 .text{
     font-size: 12px;
 }

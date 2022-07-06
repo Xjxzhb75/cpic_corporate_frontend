@@ -12,3 +12,10 @@ export async function addbankvisitApi(params) {
 export async function getCalendarDataByUserIdApi(params) {
     return await http.getRestApi("/api/outlets/getCalendarByUserIdData",params)
 }
+export async function getBasicinfoListApi(params) {
+    return await http.get("/api/outlets/getBasicinfoList",params)
+}
+
+export async function addBasicinfoApi(params) {
+    return await http.post("/api/outlets/addbassicinfo",params)
+}

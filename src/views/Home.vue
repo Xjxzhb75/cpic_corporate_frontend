@@ -100,6 +100,7 @@
     methods: {
       iconClick() {
         this.$store.commit("MenuStore/setOpenOrClose");
+    
       },
       async loginOut() {
         let parm = {

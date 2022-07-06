@@ -26,7 +26,6 @@ Vue.prototype.$message = MessageUtils;
 
 const whiteList = ["/login"];
 router.beforeEach(async (to, from, next) => {
-  
   let token = getToken();
   if (token) {
     //token存在
@@ -52,10 +51,13 @@ router.beforeEach(async (to, from, next) => {
         }
       }
     }
-    //获取tabs
+    //将sessionStorage中的内容保存到state中，防止刷新丢失数据
     store.commit("MenuStore/getTabs");
+    store.commit("UserStore/getloginName")
+    store.commit("UserStore/getdeptList")
     //设置当前选中的tabs
     store.commit("MenuStore/setActiveTabs", to.name);
+    
   } else {
     if (whiteList.indexOf(to.path) !== -1) {
       //存在白名单中

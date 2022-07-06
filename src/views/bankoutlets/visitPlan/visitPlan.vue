@@ -117,7 +117,7 @@
 
 <script>
    import SysDialog from "../../../components/SysDialog";
-  import { getDeptByUserIdApi } from "../../../api/department"
+  
   import{getBankNameListApi,
          getBranchNameListApi,
          addbankvisitApi,
@@ -180,7 +180,7 @@
       }
     },
     created(){
-    this.userDeptinfo();
+    this.optinProps=this.$store.state.UserStore.deptList
     this.CalendarDataByUserId();
     },
     methods: { 
@@ -188,15 +188,7 @@
        this.dataPickerDisabled=!this.dataPickerDisabled;
         this.selectdeptDisabled=!this.selectdeptDisabled;
       },
-    async userDeptinfo(){
-        let parm={
-            userId:getUserId()
-        }
-        let {data:res}= await getDeptByUserIdApi(parm);
-        if (res.code == 200){
-          this.optinProps=res.data
-          }
-        },
+  
     async newOpenOption(deptId){
         this.selectdeptDisabled=!this.selectdeptDisabled;
         this.selectbankDisabled=!this.selectbankDisabled;
@@ -234,6 +226,7 @@
             this.bankvisitdata.deptId="请选择支公司";
             this.bankvisitdata.bankId="请选择银行";
             this.bankvisitdata.branchId="请选择支行";
+            this.CalendarDataByUserId();
         },
        async commitBtn(){
         try{
@@ -242,7 +235,7 @@
           if (res.code ==200){
              this.$message.success(res.msg);
              this.onReson();
-             this.CalendarDataByUserId();
+             
              }
             this.onReson();
           }

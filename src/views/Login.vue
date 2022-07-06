@@ -109,8 +109,9 @@
               let datas = res.data;
               setToken(datas.token);
               setUserId(datas.id);
-              this.$store.commit('UserStore/setloginInfo',datas.loginName)
               setTokenTime(datas.expireTime);
+              this.$store.commit('UserStore/setloginInfo',datas.loginName)
+              this.$store.dispatch('UserStore/getDeptByUserId', {parm:datas.id});
               this.$router.push("home");
             } else {
               this.$message.error(res.data.msg);
